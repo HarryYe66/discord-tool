@@ -1,0 +1,25 @@
+{
+  "name": "discord-tool",
+  "version": "1.0.0",
+  "main": "ts-node index.ts",
+  "scripts": {
+    "start": "ts-node index.ts"
+  },
+  "description": "A simple discord bot",
+  "author": "Mehdi",
+  "repository": "https://github.com/HarryYe66/discord-tool",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node-telegram-bot-api": "^0.64.7",
+    "axios": "^1.7.4",
+    "dotenv": "^16.4.5",
+    "node-telegram-bot-api": "^0.66.0",
+    "ts-node": "^10.9.2",
+    "ws": "^8.17.1",
+    "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.10",
+    "typescript": "^5.5.3"
+  }
+}
