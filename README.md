@@ -1,10 +1,15 @@
 # Discord Tool
 
-## 介绍
+# Example
+
+<p align="center"><img align="center" src="./.github/1.png"/></p>
+<p align="center"><img align="center" src="./.github/2.png#gh-light-mode-only"/></p>
+
+## Docs
 
 一个根据 Discord API 开发的项目，用于实现 Discord 机器人功能，包括消息发送、频道管理、用户管理等。
 
-## 功能
+## Functions
 
 - 消息发送：发送文本、图片、语音、视频等消息到指定频道。
 - 频道管理：创建、删除、修改频道，设置频道权限等。
@@ -61,21 +66,15 @@ npm install
 
 `token` You can go to [Discord Developer Portal](https://discord.com/developers/applications) to create a new application and get the channel ID.
 
-   <p align="center"><img align="center" src="./.github/image.png#gh-dark-mode-only"/></p>
-
 `discordChannelId` You can go to [Discord Developer Portal](https://discord.com/developers/applications) to create a new application and get the channel ID.
-
-   <p align="center"><img align="center" src="./.github/WX20240815-181655@2x.png#gh-dark-mode-only"/></p>
 
 `telegramBotToken` You can go to [BotFather](https://t.me/BotFather) to create a new bot and get the token.
 
-   <p align="center"><img align="center" src="./.github/WX20240815-182335@2x.png#gh-dark-mode-only"/></p>
-
 `telegramChatId` You can go to [Telegram](https://t.me/) to get the chat ID.
 
-   <p align="center"><img align="center" src="./.github/123.png#gh-dark-mode-only"/></p>
+## You can see thitis project in my blog
 
-# Example
-
-<p align="center"><img align="center" src="./.github/1.png#gh-dark-mode-only"/></p>
-<p align="center"><img align="center" src="./.github/2.png#gh-light-mode-only"/></p>
+   <p align="center"><img align="center" src="./.github/image.png"/></p>
+   <p align="center"><img align="center" src="./.github/WX20240815-181655@2x.png"/></p>
+   <p align="center"><img align="center" src="./.github/WX20240815-182335@2x.png"/></p>
+   <p align="center"><img align="center" src="./.github/123.png"/></p>
