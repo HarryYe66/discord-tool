@@ -3,7 +3,6 @@
 # Example
 
 <p align="center"><img align="center" src="./.github/1.png"/></p>
-<p align="center"><img align="center" src="./.github/2.png#gh-light-mode-only"/></p>
 
 ## Docs
 
@@ -74,7 +73,8 @@ npm install
 
 ## You can see thitis project in my blog
 
-   <p align="center"><img align="center" src="./.github/image.png"/></p>
-   <p align="center"><img align="center" src="./.github/WX20240815-181655@2x.png"/></p>
-   <p align="center"><img align="center" src="./.github/WX20240815-182335@2x.png"/></p>
-   <p align="center"><img align="center" src="./.github/123.png"/></p>
+   <p align="center"><img align="center" alt='token' src="./.github/image.png"/></p>
+   <p align="center"><img align="center" alt='discordChannelId'  src="./.github/WX20240815-181655@2x.png"/></p>
+   <p align="center"><img align="center"  alt='telegramBotToken' src="./.github/WX20240815-182335@2x.png"/></p>
+   <p align="center"><img align="center" alt='telegramChatId'  src="./.github/123.png"/></p>
+<p align="center"><img align="center" src="./.github/2.png#gh-light-mode-only"/></p>
