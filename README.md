@@ -33,10 +33,6 @@ npm install
 - `TELEGRAM_TOKEN`：Telegram 机器人的 Token。
 - `TELEGRAM_CHAT_ID`：Telegram 机器人的 Chat ID。
 
-```
-
-```
-
 3. `.config/instances.ts` 配置教程
 
    - connectParams 通过登录网页版获取 token
@@ -50,31 +46,36 @@ npm install
         bindings: [
    ```
 
-   - 3 修改 监听转发的地方
+- 3 修改 监听转发的地方
 
-   ```bash
-      bindings: [
-      {
-        discordChannelId: '1261273457337831538', //Discord的频道ID
-        telegramBotToken: process.env.TELEGRAM_BOT_TOKEN_1 || '' //通过电报机器人获取的机器人私钥,
-        telegramChatId: 'Dexcc_App'//需要转发分享的群聊或者你的电报账号 ,
-      },
-   ```
+```bash
+   bindings: [
+   {
+     discordChannelId: '1261273457337831538', //Discord的频道ID
+     telegramBotToken: process.env.TELEGRAM_BOT_TOKEN_1 || '' //通过电报机器人获取的机器人私钥,
+     telegramChatId: 'Dexcc_App'//需要转发分享的群聊或者你的电报账号 ,
+   },
+```
 
-   # Example
+## How to config
 
-   `token` You can go to [Discord Developer Portal](https://discord.com/developers/applications) to create a new application and get the channel ID.
+`token` You can go to [Discord Developer Portal](https://discord.com/developers/applications) to create a new application and get the channel ID.
+
    <p align="center"><img align="center" src="./.github/image.png#gh-dark-mode-only"/></p>
 
-   `discordChannelId` You can go to [Discord Developer Portal](https://discord.com/developers/applications) to create a new application and get the channel ID.
+`discordChannelId` You can go to [Discord Developer Portal](https://discord.com/developers/applications) to create a new application and get the channel ID.
+
    <p align="center"><img align="center" src="./.github/WX20240815-181655@2x.png#gh-dark-mode-only"/></p>
 
-   `telegramBotToken` You can go to [BotFather](https://t.me/BotFather) to create a new bot and get the token.
+`telegramBotToken` You can go to [BotFather](https://t.me/BotFather) to create a new bot and get the token.
+
    <p align="center"><img align="center" src="./.github/WX20240815-182335@2x.png#gh-dark-mode-only"/></p>
 
-   `telegramChatId` You can go to [Telegram](https://t.me/) to get the chat ID.
+`telegramChatId` You can go to [Telegram](https://t.me/) to get the chat ID.
+
    <p align="center"><img align="center" src="./.github/123.png#gh-dark-mode-only"/></p>
 
-   `Example`
-   <p align="center"><img align="center" src="./.github/1.png#gh-dark-mode-only"/></p>
-   <p align="center"><img align="center" src="./.github/2.png#gh-dark-mode-only"/></p>
+# Example
+
+<p align="center"><img align="center" src="./.github/example-dark.png#gh-dark-mode-only"/></p>
+<p align="center"><img align="center" src="./.github/example-light.png#gh-light-mode-only"/></p>
