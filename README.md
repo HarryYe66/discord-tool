@@ -73,8 +73,19 @@ npm install
 
 ## You can see thitis project in my blog
 
+<span>`token` </span>
+
    <p align="center"><img align="center" alt='token' src="./.github/image.png"/></p>
+
+<span>`discordChannelId` </span>
+
    <p align="center"><img align="center" alt='discordChannelId'  src="./.github/WX20240815-181655@2x.png"/></p>
+
+<span>`telegramBotToken` </span>
+
    <p align="center"><img align="center"  alt='telegramBotToken' src="./.github/WX20240815-182335@2x.png"/></p>
+
+<span>`telegramChatId` </span>
+
    <p align="center"><img align="center" alt='telegramChatId'  src="./.github/123.png"/></p>
 <p align="center"><img align="center" src="./.github/2.png#gh-light-mode-only"/></p>
