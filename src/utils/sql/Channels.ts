@@ -1,7 +1,17 @@
 import { pool } from '../database/mySql'
 
 export const tableName = 'Channels'
+interface Binding {
+  discordChannelId: string
+  telegramBotToken: string
+  telegramChatId: string
+}
 
+interface InstanceConfig {
+  name: string
+  connectParams: object
+  bindings: Binding[]
+}
 export default class ChannelsService {
   async addChannel(
     name: string,
@@ -100,6 +110,42 @@ export default class ChannelsService {
       return result[0].total
     } catch (error) {
       console.error('Error countChannels', error)
+      throw error
+    } finally {
+      client.release()
+    }
+  }
+
+  // 新增组织实例的功能
+  async organizeInstances(): Promise<InstanceConfig[]> {
+    const client = await pool.getConnection()
+    try {
+      const [rows] = await client.query(`SELECT * FROM ${tableName}`)
+      const channels = rows as any[]
+
+      const instancesMap: { [key: string]: InstanceConfig } = {}
+
+      channels.forEach((channel) => {
+        const { name, token, channelId, botKey, chatId } = channel
+
+        if (!instancesMap[token]) {
+          instancesMap[token] = {
+            name: name || `Instance for token ${token}`,
+            connectParams: { token },
+            bindings: [],
+          }
+        }
+
+        instancesMap[token].bindings.push({
+          discordChannelId: channelId,
+          telegramBotToken: botKey,
+          telegramChatId: chatId,
+        })
+      })
+
+      return Object.values(instancesMap)
+    } catch (error) {
+      console.error('Error organizing instances:', error)
       throw error
     } finally {
       client.release()

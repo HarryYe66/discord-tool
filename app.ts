@@ -1,6 +1,7 @@
 import express from 'express'
 import channelRoutes from './src/api/Channel'
 import cors from 'cors'
+import { startListeners, refreshListeners } from './src/index' // 引入封装的模块
 
 const app = express()
 
@@ -30,4 +31,6 @@ const PORT = process.env.PORT || 3013
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
+  startListeners() // 启动监听器
 })
+setInterval(refreshListeners, 5 * 60 * 1000)

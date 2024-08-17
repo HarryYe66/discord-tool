@@ -5,9 +5,7 @@ import getBotInstance from '../src/utils/telegram/botInstance'
 
 import { instances, connectParamsConfig, subParams } from './config/instances'
 
-import ChannelsService from '../src/utils/sql/Channels'
-const activeConnections: WebSocket[] = []
-const createDiscordListener = (instance: any) => {
+const createDiscordListener = (instance: (typeof instances)[0]) => {
   const inflate = zlib.createInflate()
   let dataBuffer: any
   let decompressedData: any
@@ -16,7 +14,6 @@ const createDiscordListener = (instance: any) => {
   const ws = new WebSocket(
     'wss://gateway.discord.gg/?encoding=json&v=9&compress=zlib-stream'
   )
-  activeConnections.push(ws) // 将 WebSocket 连接存储到全局数组中
 
   inflate.on('data', (chunk) => {
     decompressedData = Buffer.concat([decompressedData, chunk])
@@ -79,9 +76,9 @@ const createDiscordListener = (instance: any) => {
           } = message.d
           //   console.log(message.d.content, 'message_')
           const binding = instance.bindings.find(
-            (b: any) => b.discordChannelId === channel_id
+            (b) => b.discordChannelId === channel_id
           )
-          console.log(content, '_messages', channel_id)
+          console.log(content, '_messages')
 
           if (binding) {
             // console.log(message, '_message')
@@ -154,31 +151,5 @@ const createDiscordListener = (instance: any) => {
     console.error(`Error in Discord instance ${instance.name}:`, err)
   })
 }
-const startListeners = async () => {
-  activeConnections.forEach((ws) => {
-    if (ws.readyState === WebSocket.OPEN) {
-      ws.close()
-    }
-  })
-  activeConnections.length = 0
 
-  const channelsService = new ChannelsService()
-
-  try {
-    const instances = await channelsService.organizeInstances()
-    console.log(instances, 'instances')
-
-    instances.forEach((instance) => {
-      createDiscordListener(instance)
-    })
-  } catch (error) {
-    console.error('Error starting listeners:', error)
-  }
-}
-
-const refreshListeners = () => {
-  console.log('Refreshing listeners...')
-  startListeners()
-}
-
-export { startListeners, refreshListeners }
+instances.forEach(createDiscordListener)
