@@ -35,6 +35,41 @@ router.post('/add/channels', async (req, res) => {
   }
 })
 
+// 更新指定ID的频道
+router.post('/update/channels', async (req, res) => {
+  try {
+    const { id, name, channelId, chatId, token, botKey, delay } = req.body
+
+    if (isNaN(id)) {
+      return res.status(400).json({ message: 'Invalid channel ID' })
+    }
+
+    // 输入验证
+    if (!name || !id || !chatId || !token || !botKey) {
+      return res.status(400).json({ message: 'All fields are required' })
+    }
+
+    const updatedChannel = await channelService.updateChannel(
+      id,
+      name,
+      channelId,
+      chatId,
+      token,
+      botKey,
+      delay
+    )
+
+    if (updatedChannel) {
+      return SuccessMsg(res, updatedChannel, '更新成功')
+    } else {
+      return ErrorMsg(res, null, '频道未找到或更新失败')
+    }
+  } catch (error) {
+    console.error('Error updating channel:', error)
+    return ErrorMsg(res, null, '更新频道时发生错误')
+  }
+})
+
 // 获取单个频道
 router.get('/channels/:id', async (req, res) => {
   try {

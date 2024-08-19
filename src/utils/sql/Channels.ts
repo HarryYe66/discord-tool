@@ -116,6 +116,43 @@ export default class ChannelsService {
     }
   }
 
+  async updateChannel(
+    id: number,
+    name: string,
+    channelId: string,
+    chatId: string,
+    token: string,
+    botKey: string,
+    delay: number
+  ) {
+    const client = await pool.getConnection()
+    try {
+      // 更新频道信息
+      const [result]: any = await client.query(
+        `UPDATE ${tableName} SET name = ?, channelId = ?, chatId = ?, token = ?, botKey = ?, delay = ? WHERE id = ?`,
+        [name, channelId, chatId, token, botKey, delay, id]
+      )
+
+      if (result.affectedRows > 0) {
+        // 如果更新成功，查询并返回更新后的记录
+        const [rows] = await client.query(
+          `SELECT * FROM ${tableName} WHERE id = ?`,
+          [id]
+        )
+        const updatedChannel = rows as any
+        return updatedChannel.length ? updatedChannel[0] : null
+      } else {
+        // 如果没有更新任何记录，返回 null
+        return null
+      }
+    } catch (error) {
+      console.error('Error updating channel:', error)
+      throw error
+    } finally {
+      client.release()
+    }
+  }
+
   // 新增组织实例的功能
   async organizeInstances(): Promise<InstanceConfig[]> {
     const client = await pool.getConnection()

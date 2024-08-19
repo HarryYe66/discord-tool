@@ -7,6 +7,7 @@ import { instances, connectParamsConfig, subParams } from './config/instances'
 
 import ChannelsService from '../src/utils/sql/Channels'
 const activeConnections: WebSocket[] = []
+
 const createDiscordListener = (instance: any) => {
   const inflate = zlib.createInflate()
   let dataBuffer: any
@@ -93,12 +94,32 @@ const createDiscordListener = (instance: any) => {
               newtelegramChatId = telegramChatId.slice(1)
             }
             const bot = getBotInstance(telegramBotToken)
+            // 判断 newtelegramChatId 是否以 /* 开头
+            const options: any = {}
+
+            // 解析 chatId 和 messageThreadId
+            let actualChatId = newtelegramChatId
+            let messageThreadId: number | undefined
+
+            if (newtelegramChatId.includes('/')) {
+              const [parsedChatId, parsedThreadId] =
+                newtelegramChatId.split('/')
+              actualChatId = `@${parsedChatId}`
+              messageThreadId = parseInt(parsedThreadId, 10)
+            }
+
+            // 如果解析出 messageThreadId，则将其包含在选项中
+            if (messageThreadId) {
+              options.message_thread_id = messageThreadId
+            }
 
             //首先判断是图文还是纯文本
             if (attachments.length === 0) {
               //图文
               if (content !== '') {
-                await bot.sendMessage(`@${newtelegramChatId}`, content)
+                // await bot.sendMessage(`@${newtelegramChatId}`, content)
+
+                await bot.sendMessage(actualChatId, content, options)
               }
             } else {
               let mediaGroup: any[] = []
@@ -119,7 +140,7 @@ const createDiscordListener = (instance: any) => {
                   })
                 }
               })
-              await bot.sendMediaGroup(`@${newtelegramChatId}`, mediaGroup)
+              await bot.sendMediaGroup(actualChatId, mediaGroup, options)
             }
 
             // console.log(

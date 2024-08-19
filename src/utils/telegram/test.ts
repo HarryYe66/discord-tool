@@ -8,10 +8,12 @@ const userInteractions: { [key: string]: string } = {}
 
 bot.on('message', async (msg: any) => {
   try {
-    const chatId = msg.chat.id
-    const userId = msg.from?.id.toString()
-    const userLanguage_code = msg.from?.language_code.toString() || 'en'
-    const messageText = msg.text
+    console.log(msg, 'msg')
+
+    // const chatId = msg.chat.id
+    // const userId = msg.from?.id.toString()
+    // const userLanguage_code = msg.from?.language_code.toString() || 'en'
+    // const messageText = msg.text
     console.log(msg, 'msg')
     let replyContent: any = {}
     // // replyContent.caption = 'test'
@@ -34,8 +36,8 @@ bot.on('message', async (msg: any) => {
       //   },
     ]
 
-    const test = sendMediaGroup('@Dexcc_App', replyContent)
-    // const test = sendTextMessage('@Dexcc_App', replyContent)
+    const test = sendMediaGroup('@qklsndbddxcdd', replyContent, 835)
+    // const test = sendTextMessage('@qklsndbddxcdd', replyContent, 835)
     // const test = sendMediaGroup('@Dexcc_App', replyContent)
 
     // await processMessages(chatId, replyTrigger)
@@ -59,15 +61,29 @@ bot.on('callback_query', async (callbackQuery: any) => {
 })
 
 // 发送带有文字的消息
-async function sendTextMessage(chatId: number | string, replyContent: any) {
+async function sendTextMessage(
+  chatId: number | string,
+  replyContent: any,
+  messageThreadId?: number
+) {
   try {
-    await bot.sendMessage(chatId, replyContent.message || '收到您的消息！')
+    const options: any = {}
+
+    // 如果提供了 messageThreadId，则将其包含在选项中
+    if (messageThreadId) {
+      options.message_thread_id = messageThreadId
+    }
+
+    await bot.sendMessage(
+      chatId,
+      replyContent.message || '收到您的消息！',
+      options
+    )
     console.log('Text message sent.')
   } catch (error) {
     console.error('Error sending text message:', error)
   }
 }
-
 // 发送带有图片和文字的消息
 async function sendPhotoWithTextMessage(
   chatId: number | string,
@@ -106,8 +122,11 @@ async function sendVideoWithTextMessage(
   }
 }
 
-// 发送媒体组的函数
-async function sendMediaGroup(chatId: number | string, replyContent: any) {
+async function sendMediaGroup(
+  chatId: number | string,
+  replyContent: any,
+  messageThreadId?: number
+) {
   const { mediaGroup } = replyContent
   if (!mediaGroup || mediaGroup.length === 0) {
     console.error('No media provided for the media group.')
@@ -121,8 +140,15 @@ async function sendMediaGroup(chatId: number | string, replyContent: any) {
     caption: media.caption || '', // 可以为每个媒体单独指定说明
   }))
 
+  const options: any = {}
+
+  // 如果提供了 messageThreadId，则将其包含在选项中
+  if (messageThreadId) {
+    options.message_thread_id = messageThreadId
+  }
+
   try {
-    await bot.sendMediaGroup(chatId, mediaArray)
+    await bot.sendMediaGroup(chatId, mediaArray, options)
     console.log('Media group message sent.')
   } catch (error) {
     console.error('Error sending media group message:', error)
